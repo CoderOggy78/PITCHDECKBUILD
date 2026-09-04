@@ -1,0 +1,370 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: #07090E;
+    --foreground: #F1F5F9;
+    --card-bg: rgba(11, 14, 23, 0.92);
+    --card-border: rgba(255, 255, 255, 0.1);
+    --input-bg: rgba(15, 20, 32, 0.85);
+    --input-border: rgba(255, 255, 255, 0.15);
+  }
+  
+  html.light {
+    --background: #F8FAFC;
+    --foreground: #090D16;
+    --card-bg: rgba(255, 255, 255, 0.96);
+    --card-border: #CBD5E1;
+    --input-bg: #FFFFFF;
+    --input-border: #94A3B8;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    overflow-x: hidden;
+    transition: background-color 0.25s ease, color 0.25s ease;
+  }
+
+  /* Custom subtle scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(100, 116, 139, 0.3);
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(100, 116, 139, 0.6);
+  }
+}
+
+.font-serif-hero {
+  font-family: 'Instrument Serif', 'Cormorant Garamond', Georgia, serif;
+}
+
+.font-serif-sub {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+}
+
+/* Glassmorphism card utilities */
+.glass-panel {
+  background: var(--card-bg);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--card-border);
+}
+
+.glass-panel-interactive {
+  background: var(--card-bg);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--card-border);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-panel-interactive:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 16px 36px -12px rgba(0, 0, 0, 0.4);
+}
+
+/* ------------------------------------------------------------------------- */
+/* PILL & CTA BUTTONS (Pure white text in both light and dark themes)       */
+/* ------------------------------------------------------------------------- */
+.glass-pill,
+button.glass-pill,
+a.glass-pill {
+  color: #FFFFFF !important;
+}
+
+html.dark .glass-pill {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.5), inset 0 1px 1px 0 rgba(255, 255, 255, 0.15);
+  color: #FFFFFF !important;
+}
+
+html.dark .glass-pill:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.45);
+  box-shadow: 0 6px 24px -2px rgba(255, 255, 255, 0.25), inset 0 1px 2px 0 rgba(255, 255, 255, 0.25);
+  color: #FFFFFF !important;
+}
+
+html.light .glass-pill,
+html.light button.glass-pill,
+html.light a.glass-pill {
+  background-color: #0F172A !important;
+  border: 1px solid #0F172A !important;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.25) !important;
+  color: #FFFFFF !important;
+}
+
+html.light .glass-pill:hover,
+html.light button.glass-pill:hover,
+html.light a.glass-pill:hover {
+  background-color: #1E293B !important;
+  border-color: #1E293B !important;
+  box-shadow: 0 6px 20px rgba(15, 23, 42, 0.35) !important;
+  color: #FFFFFF !important;
+}
+
+/* Ensure all nested text and icons inside .glass-pill stay pure white */
+.glass-pill *,
+html.light .glass-pill *,
+html.dark .glass-pill * {
+  color: #FFFFFF !important;
+  stroke: #FFFFFF !important;
+}
+
+/* ========================================================================= */
+/* STRICT 100% CONTRAST SYSTEM FOR LIGHT MODE & DARK MODE                    */
+/* ========================================================================= */
+
+/* --- LIGHT MODE RULES (Pure Crisp Black & Charcoal on Paper White) --- */
+html.light {
+  background-color: #F8FAFC !important;
+  color: #090D16 !important;
+}
+
+html.light body,
+html.light main {
+  background-color: #F8FAFC !important;
+  color: #090D16 !important;
+}
+
+html.light header {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+  border-bottom: 1px solid #E2E8F0 !important;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05) !important;
+}
+
+html.light .navbar-brand,
+html.light .navbar-brand span {
+  color: #090D16 !important;
+}
+
+html.light header nav a {
+  color: #334155 !important;
+}
+
+html.light header nav a:hover,
+html.light header nav a.font-bold {
+  color: #090D16 !important;
+}
+
+/* Headings and titles in light mode */
+html.light h1,
+html.light h2,
+html.light h3,
+html.light h4,
+html.light h5,
+html.light h6 {
+  color: #090D16 !important;
+}
+
+/* Hero text in light mode: Crystal clear dark typography over luminous painting */
+html.light .hero-heading {
+  color: #090D16 !important;
+  text-shadow: 0 2px 14px rgba(255, 255, 255, 0.9), 0 0 30px rgba(255, 255, 255, 0.8) !important;
+}
+
+html.light .hero-paragraph {
+  color: #090D16 !important;
+  font-weight: 600 !important;
+  text-shadow: 0 1px 10px rgba(255, 255, 255, 0.95), 0 0 20px rgba(255, 255, 255, 0.9) !important;
+}
+
+html.light .hero-title-italic {
+  color: #1E293B !important;
+  text-shadow: 0 2px 14px rgba(255, 255, 255, 0.9) !important;
+}
+
+/* Hero vignette in light mode: subtle bottom fade, keeping artwork 100% visible */
+html.light .hero-vignette {
+  background: linear-gradient(to top, #F8FAFC 0%, rgba(248, 250, 252, 0.3) 25%, transparent 60%) !important;
+}
+
+/* Hero vignette in dark mode */
+html.dark .hero-vignette {
+  background: linear-gradient(to top, #07090E 0%, rgba(7, 9, 14, 0.4) 30%, transparent 70%) !important;
+}
+
+/* Body and descriptions in light mode */
+html.light p {
+  color: #1E293B !important;
+}
+
+html.light p.text-slate-400,
+html.light p.text-slate-500,
+html.light span.text-slate-400 {
+  color: #334155 !important;
+}
+
+html.light .text-slate-100,
+html.light .text-slate-200 {
+  color: #0F172A !important;
+}
+
+html.light .text-slate-300 {
+  color: #1E293B !important;
+}
+
+html.light .text-slate-400 {
+  color: #334155 !important;
+}
+
+html.light .text-slate-500 {
+  color: #475569 !important;
+}
+
+html.light .text-slate-600 {
+  color: #64748B !important;
+}
+
+html.light .text-brand-cyan {
+  color: #0284C7 !important; /* Rich sky/ocean blue for light mode */
+  font-weight: 700 !important;
+}
+
+html.light .text-amber-400 {
+  color: #B45309 !important; /* Deep warm amber for light mode */
+  font-weight: 700 !important;
+}
+
+html.light .text-brand-accent {
+  color: #6D28D9 !important; /* Deep royal violet */
+  font-weight: 600 !important;
+}
+
+html.light .border-white,
+html.light .border-white\/10,
+html.light .border-white\/15,
+html.light .border-white\/20,
+html.light .border-white\/30,
+html.light .border-white\/5 {
+  border-color: #CBD5E1 !important;
+}
+
+html.light .bg-white\/5,
+html.light .bg-white\/10 {
+  background-color: #F1F5F9 !important;
+  border-color: #CBD5E1 !important;
+  color: #0F172A !important;
+}
+
+html.light .bg-white\/5:hover,
+html.light .bg-white\/10:hover {
+  background-color: #E2E8F0 !important;
+  color: #0F172A !important;
+}
+
+html.light .glass-panel,
+html.light .glass-panel-interactive {
+  background: rgba(255, 255, 255, 0.96) !important;
+  border: 1px solid #CBD5E1 !important;
+  box-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.08), 0 4px 6px -2px rgba(15, 23, 42, 0.04) !important;
+}
+
+html.light .glass-panel-interactive:hover {
+  border-color: #94A3B8 !important;
+  box-shadow: 0 20px 35px -5px rgba(15, 23, 42, 0.12) !important;
+}
+
+/* Light mode inputs, textareas, and selects */
+html.light input,
+html.light textarea,
+html.light select {
+  background-color: #FFFFFF !important;
+  color: #0F172A !important;
+  border: 1px solid #94A3B8 !important;
+  font-weight: 400 !important;
+}
+
+html.light input:focus,
+html.light textarea:focus,
+html.light select:focus {
+  border-color: #0F172A !important;
+  outline: 2px solid rgba(15, 23, 42, 0.15) !important;
+}
+
+html.light input::placeholder,
+html.light textarea::placeholder {
+  color: #64748B !important;
+}
+
+html.light label {
+  color: #0F172A !important;
+  font-weight: 600 !important;
+}
+
+html.light .pipeline-ticker {
+  background-color: #FFFFFF !important;
+  border-color: #CBD5E1 !important;
+  color: #0F172A !important;
+}
+
+/* --- DARK MODE RULES (Pure Crisp White on Midnight Obsidian) --- */
+html.dark {
+  background-color: #07090E !important;
+  color: #F1F5F9 !important;
+}
+
+html.dark body,
+html.dark main {
+  background-color: #07090E !important;
+  color: #F1F5F9 !important;
+}
+
+html.dark header {
+  background-color: rgba(7, 9, 14, 0.85) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+html.dark .text-white {
+  color: #FFFFFF !important;
+}
+
+html.dark input,
+html.dark textarea,
+html.dark select {
+  background-color: rgba(15, 20, 32, 0.9) !important;
+  color: #FFFFFF !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+}
+
+html.dark input:focus,
+html.dark textarea:focus,
+html.dark select:focus {
+  border-color: #FFFFFF !important;
+}
+
+html.dark input::placeholder,
+html.dark textarea::placeholder {
+  color: #64748B !important;
+}
+
+/* Starfield / cosmic ambience */
+.starfield-overlay {
+  background-image: 
+    radial-gradient(1px 1px at 20px 30px, #ffffff, rgba(0,0,0,0)),
+    radial-gradient(1px 1px at 40px 70px, rgba(255,255,255,0.7), rgba(0,0,0,0)),
+    radial-gradient(1.5px 1.5px at 90px 40px, #fff, rgba(0,0,0,0)),
+    radial-gradient(1px 1px at 160px 120px, rgba(255,255,255,0.8), rgba(0,0,0,0)),
+    radial-gradient(1.5px 1.5px at 240px 80px, #ffffff, rgba(0,0,0,0)),
+    radial-gradient(1px 1px at 310px 150px, rgba(255,255,255,0.6), rgba(0,0,0,0));
+  background-repeat: repeat;
+  background-size: 350px 350px;
+}

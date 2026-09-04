@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: ventureforge_db
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-ventureforge}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-ventureforge_secret}
+      POSTGRES_DB: ${POSTGRES_DB:-ventureforge}
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  api:
+    build:
+      context: ./apps/api
+      dockerfile: Dockerfile
+    container_name: ventureforge_api
+    environment:
+      - DATABASE_URL=sqlite+aiosqlite:///data/ventureforge.db
+      - AI_PROVIDER=${AI_PROVIDER:-deterministic}
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+      - GEMINI_API_KEY=${GEMINI_API_KEY:-}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:-}
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./apps/api/data:/app/data
+    restart: unless-stopped
+
+  web:
+    build:
+      context: ./apps/web
+      dockerfile: Dockerfile
+    container_name: ventureforge_web
+    environment:
+      - NEXT_PUBLIC_API_BASE=http://127.0.0.1:8000/api
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api
+    restart: unless-stopped
+
+volumes:
+  pgdata:
